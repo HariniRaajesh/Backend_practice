@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter App</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background: linear-gradient(135deg,#667eea,#764ba2);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .container{
+            width:100%;
+            max-width:800px;
+            background:white;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:25px;
+            color:#333;
+            font-size:38px;
+        }
+
+        textarea{
+            width:100%;
+            height:220px;
+            padding:20px;
+            border:none;
+            outline:none;
+            resize:none;
+            border-radius:15px;
+            background:#f3f4f6;
+            font-size:16px;
+            margin-bottom:20px;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#667eea;
+            color:white;
+            font-size:18px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#5a67d8;
+            transform:scale(1.02);
+        }
+
+        .results{
+            margin-top:30px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:#f8f9ff;
+            padding:20px;
+            border-radius:15px;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2{
+            font-size:32px;
+            color:#667eea;
+            margin-bottom:10px;
+        }
+
+        .card p{
+            color:#555;
+            font-size:15px;
+            font-weight:500;
+        }
+
+        .footer{
+            margin-top:25px;
+            text-align:center;
+            color:#777;
+            font-size:14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>📝 Word Counter App</h1>
+
+        <form action="/analyse" method="post">
+
+            <textarea 
+                name="text" 
+                placeholder="Enter your text here..."
+            >{{ text if text else '' }}</textarea>
+
+            <button type="submit">Analyze Text</button>
+
+        </form>
+
+        {% if word_count is defined %}
+
+        <div class="results">
+
+            <div class="card">
+                <h2>{{ word_count }}</h2>
+                <p>Words</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ char_count }}</h2>
+                <p>Characters</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ char_no_space }}</h2>
+                <p>Characters Without Spaces</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ sentence_count }}</h2>
+                <p>Sentences</p>
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        <div class="footer">
+            Built with FastAPI ❤️
+        </div>
+
+    </div>
+
+</body>
+</html>
